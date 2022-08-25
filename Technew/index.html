@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div class="res"></div>
+
+    <script >
+        async function kerakli() {
+    const data = await fetch(`https://tech-info.p.rapidapi.com/news`, {
+        method: "GET",
+        headers: {
+		'X-RapidAPI-Key': 'e760741a4fmshc16220c60bf4c5fp1bd712jsn7e1afbd3e64a',
+		'X-RapidAPI-Host': 'tech-info.p.rapidapi.com'
+	}
+
+    }) 
+    const res = await data.json()
+    console.log(res);
+    news(res)
+        }
+     function news(res){
+        res.forEach(newss => {
+        
+            const newsDiv = document.createElement("div")
+            newsDiv.innerHTML = `
+            <div style="newpage" >
+                <p>${newss.dateTime}</p>
+                <img src="${newss.img}" alt="error content" >
+           <h1>${newss.title}</h1>
+                </div>
+            `
+            document.querySelector(".res").appendChild(newsDiv)
+        })
+     }
+kerakli()
+    </script>
+
+</body>
+</html>
